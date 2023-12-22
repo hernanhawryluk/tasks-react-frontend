@@ -3,7 +3,7 @@ import { Task } from "../context/TasksContext";
 
 export const getTasksRequest = () => axios.get("/tasks");
 
-export const getTaskRequest = (id: string) => axios.get(`/task/${id}`);
+export const getTaskRequest = (id: string) => axios.get(`/tasks/${id}`);
 
 export const createTaskRequest = (task: Task) => axios.post("/tasks", task);
 

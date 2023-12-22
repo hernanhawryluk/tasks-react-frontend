@@ -3,6 +3,7 @@ import {
   createTaskRequest,
   getTasksRequest,
   deleteTaskRequest,
+  getTaskRequest,
 } from "../api/task";
 
 type TaskProviderProps = {
@@ -14,6 +15,7 @@ type TaskContextType = {
   createTask: (task: Task) => void;
   deleteTask: (id: string) => void;
   getTasks: () => void;
+  getTask: (id: string) => void;
 };
 
 export type Task = {
@@ -50,6 +52,11 @@ export function TaskProvider({ children }: TaskProviderProps) {
     }
   };
 
+  const getTask = async (id: string) => {
+    const res = await getTaskRequest(id);
+    console.log(res);
+  };
+
   const createTask = async (task: Task) => {
     const res = await createTaskRequest(task);
     console.log(res);
@@ -66,7 +73,9 @@ export function TaskProvider({ children }: TaskProviderProps) {
   };
 
   return (
-    <TaskContext.Provider value={{ tasks, createTask, getTasks, deleteTask }}>
+    <TaskContext.Provider
+      value={{ tasks, createTask, getTasks, getTask, deleteTask }}
+    >
       {children}
     </TaskContext.Provider>
   );

@@ -1,9 +1,18 @@
 import { useForm } from "react-hook-form";
 import { useTasks, Task } from "../../context/TasksContext";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 function TaskForm() {
   const { register, handleSubmit } = useForm();
-  const { tasks, createTask } = useTasks();
+  const { getTask, createTask } = useTasks();
+  const params = useParams();
+
+  useEffect(() => {
+    if (params.id) {
+      getTask(params.id);
+    }
+  }, []);
 
   const onSubmit = handleSubmit((data: Task) => {
     createTask(data);
