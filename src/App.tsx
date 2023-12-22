@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { TaskProvider } from "./context/TasksContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -12,21 +13,23 @@ import TaskForm from "./components/Tasks/TaskForm";
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+      <TaskProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
-          <Route element={<ProtectedRoutes />}>
-            <Route path="/tasks" element={<Tasks />} />
-            <Route path="/tasks/new" element={<TaskForm />} />
-            <Route path="/tasks/:id" element={<TaskForm />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="*" element={<p>There's nothing here: 404!</p>} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            <Route element={<ProtectedRoutes />}>
+              <Route path="/tasks" element={<Tasks />} />
+              <Route path="/tasks/new" element={<TaskForm />} />
+              <Route path="/tasks/:id" element={<TaskForm />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="*" element={<p>There's nothing here: 404!</p>} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </TaskProvider>
     </AuthProvider>
   );
 }
