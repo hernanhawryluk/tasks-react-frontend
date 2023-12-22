@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { Task, useTasks } from "../../context/TasksContext";
 
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
+
 function TaskCard({ task }: { task: Task }) {
   const { deleteTask } = useTasks();
 
@@ -9,7 +13,7 @@ function TaskCard({ task }: { task: Task }) {
       <header>
         <h1 className="text-2xl font-bold">{task.title}</h1>
         <p className="text-slate-300">{task.description}</p>
-        <p>{task.date && new Date(task.date).toLocaleDateString()}</p>
+        <p>{task.date && dayjs(task.date).format("DD/MM/YYYY")}</p>
       </header>
       <div className="flex justify-between">
         <Link to={`/tasks/${task._id}`}>Edit</Link>

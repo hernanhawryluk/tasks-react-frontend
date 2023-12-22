@@ -16,21 +16,23 @@ function App() {
     <AuthProvider>
       <TaskProvider>
         <BrowserRouter>
-          <main className="container mx-auto px-10">
+          <main className="container flex h-[100vh] w-full items-center justify-center px-10 py-10 gap-10">
             <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+            <div className=" h-[90%] w-full">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
 
-              <Route element={<ProtectedRoutes />}>
-                <Route path="/tasks" element={<Tasks />} />
-                <Route path="/tasks/new" element={<TaskForm />} />
-                <Route path="/tasks/:id" element={<TaskForm />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="*" element={<p>There's nothing here: 404!</p>} />
-              </Route>
-            </Routes>
+                <Route element={<ProtectedRoutes />}>
+                  <Route path="/tasks" element={<Tasks />} />
+                  <Route path="/tasks/new" element={<TaskForm />} />
+                  <Route path="/tasks/:id" element={<TaskForm />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="*" element={<p>There's nothing here: 404!</p>} />
+                </Route>
+              </Routes>
+            </div>
           </main>
         </BrowserRouter>
       </TaskProvider>

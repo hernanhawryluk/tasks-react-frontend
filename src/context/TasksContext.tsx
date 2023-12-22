@@ -2,8 +2,9 @@ import { createContext, useContext, useState } from "react";
 import {
   createTaskRequest,
   getTasksRequest,
-  deleteTaskRequest,
   getTaskRequest,
+  deleteTaskRequest,
+  updateTaskRequest,
 } from "../api/task";
 
 type TaskProviderProps = {
@@ -14,8 +15,9 @@ type TaskContextType = {
   tasks: Task[];
   createTask: (task: Task) => void;
   deleteTask: (id: string) => void;
+  updateTask: (id: string, task: Task) => void;
   getTasks: () => void;
-  getTask: (id: string) => void;
+  getTask: (id: string) => Promise<Task>;
 };
 
 export type Task = {
@@ -53,13 +55,26 @@ export function TaskProvider({ children }: TaskProviderProps) {
   };
 
   const getTask = async (id: string) => {
-    const res = await getTaskRequest(id);
-    console.log(res);
+    try {
+      const res = await getTaskRequest(id);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const createTask = async (task: Task) => {
     const res = await createTaskRequest(task);
     console.log(res);
+  };
+
+  const updateTask = async (id: string, task: Task) => {
+    try {
+      const res = await updateTaskRequest(id, task);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const deleteTask = async (id: string) => {
@@ -74,7 +89,7 @@ export function TaskProvider({ children }: TaskProviderProps) {
 
   return (
     <TaskContext.Provider
-      value={{ tasks, createTask, getTasks, getTask, deleteTask }}
+      value={{ tasks, createTask, getTasks, getTask, updateTask, deleteTask }}
     >
       {children}
     </TaskContext.Provider>
