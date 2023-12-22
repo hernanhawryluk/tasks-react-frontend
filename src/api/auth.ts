@@ -1,14 +1,17 @@
-import axios from "axios";
+import axios from "./axios";
+import { UserSignin, UserSignup } from "../context/AuthContext";
 
-type User = {
-  username: string;
-  email: string;
-  password: string;
+export const registerRequest = async (user: UserSignup) => {
+  const res = await axios.post("/register", user);
+  return res;
 };
 
-const API = "http://localhost:3000/api";
+export const loginRequest = async (user: UserSignin) => {
+  const res = await axios.post("/login", user);
+  return res;
+};
 
-export const registerRequest = async (user: User) => {
-  const res = await axios.post(`${API}/register`, user);
+export const verifyTokenRequest = (token: any) => {
+  const res = axios.get("/verify-token", token);
   return res;
 };
