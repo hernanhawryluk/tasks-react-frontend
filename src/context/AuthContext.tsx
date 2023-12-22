@@ -21,6 +21,7 @@ type AuthProviderProps = {
 type AuthContextType = {
   signup: (user: UserSignup) => void;
   signin: (user: UserSignin) => void;
+  logout: () => void;
   user: UserSignup | null;
   isAuthenticated: boolean;
   loading: boolean;
@@ -107,9 +108,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
+  const logout = async () => {
+    Cookies.remove("token");
+    setIsAuthenticated(false);
+    setUser(null);
+  };
+
   return (
     <AuthContext.Provider
-      value={{ signup, signin, user, isAuthenticated, loading, errors }}
+      value={{ signup, signin, logout, user, isAuthenticated, loading, errors }}
     >
       {children}
     </AuthContext.Provider>
