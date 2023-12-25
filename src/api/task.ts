@@ -5,7 +5,8 @@ export const getTasksRequest = () => axios.get("/tasks");
 
 export const getTaskRequest = (id: string) => axios.get(`/tasks/${id}`);
 
-export const createTaskRequest = (task: Task) => axios.post("/tasks", task);
+export const createTaskRequest = async (task: Task) =>
+  axios.post("/tasks", task);
 
 export const updateTaskRequest = (id: string, task: Task) =>
   axios.put(`/tasks/${id}`, task);

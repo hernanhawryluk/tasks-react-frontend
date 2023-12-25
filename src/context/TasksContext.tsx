@@ -13,11 +13,16 @@ type TaskProviderProps = {
 
 type TaskContextType = {
   tasks: Task[];
+  taskToEdit: string;
+  taskModal: boolean;
+  loader: boolean;
   createTask: (task: Task) => void;
   deleteTask: (id: string) => void;
   updateTask: (id: string, task: Task) => void;
   getTasks: () => void;
   getTask: (id: string) => Promise<Task>;
+  openTaskModal: (id?: string) => void;
+  closeTaskModal: () => void;
 };
 
 export type Task = {
@@ -44,14 +49,19 @@ export const useTasks = () => {
 
 export function TaskProvider({ children }: TaskProviderProps) {
   const [tasks, setTasks] = useState<Task[] | []>([]);
+  const [taskModal, setTaskModal] = useState<boolean>(false);
+  const [taskToEdit, setTaskToEdit] = useState<string>("");
+  const [loader, setLoader] = useState<boolean>(false);
 
   const getTasks = async () => {
+    setLoader(true);
     try {
       const res = await getTasksRequest();
       setTasks(res.data);
     } catch (error) {
       console.log(error);
     }
+    setLoader(false);
   };
 
   const getTask = async (id: string) => {
@@ -64,20 +74,28 @@ export function TaskProvider({ children }: TaskProviderProps) {
   };
 
   const createTask = async (task: Task) => {
+    setLoader(true);
     const res = await createTaskRequest(task);
+    if (res.status === 201) setTasks([...tasks, res.data]);
+    setLoader(false);
     console.log(res);
   };
 
   const updateTask = async (id: string, task: Task) => {
+    setLoader(true);
     try {
       const res = await updateTaskRequest(id, task);
+      if (res.status === 200)
+        setTasks(tasks.map((task) => (task._id === id ? res.data : task)));
       console.log(res);
     } catch (error) {
       console.log(error);
     }
+    setLoader(false);
   };
 
   const deleteTask = async (id: string) => {
+    setLoader(true);
     try {
       const res = await deleteTaskRequest(id);
       console.log(res);
@@ -85,11 +103,34 @@ export function TaskProvider({ children }: TaskProviderProps) {
     } catch (error) {
       console.log(error);
     }
+    setLoader(false);
+  };
+
+  const openTaskModal = (id?: string) => {
+    if (id) setTaskToEdit(id);
+    setTaskModal(true);
+  };
+
+  const closeTaskModal = () => {
+    setTaskModal(false);
+    setTaskToEdit("");
   };
 
   return (
     <TaskContext.Provider
-      value={{ tasks, createTask, getTasks, getTask, updateTask, deleteTask }}
+      value={{
+        tasks,
+        taskModal,
+        taskToEdit,
+        loader,
+        createTask,
+        getTasks,
+        getTask,
+        updateTask,
+        deleteTask,
+        openTaskModal,
+        closeTaskModal,
+      }}
     >
       {children}
     </TaskContext.Provider>

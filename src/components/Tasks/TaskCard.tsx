@@ -1,29 +1,44 @@
-import { Link } from "react-router-dom";
 import { Task, useTasks } from "../../context/TasksContext";
+import { IoTrashSharp } from "react-icons/io5";
+import { FaEdit } from "react-icons/fa";
 
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
 
 function TaskCard({ task }: { task: Task }) {
-  const { deleteTask } = useTasks();
+  const { openTaskModal, deleteTask } = useTasks();
 
   return (
-    <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md m-5">
+    <div className="flex flex-col justify-between bg-neutral-800 border-[1.5px] border-neutral-600 w-[90%] sm:w-[100%] lg:w-[47%] xl:w-[31%] 2xl:w-[23%] h-[240px] p-4 rounded-md mb-4 ">
       <header>
-        <h1 className="text-2xl font-bold">{task.title}</h1>
-        <p className="text-slate-300">{task.description}</p>
-        <p>{task.date && dayjs(task.date).format("DD/MM/YYYY")}</p>
+        <h1 className="text-lg font-bold mb-2">{task.title}</h1>
+        <div className="flex flex-col justify-between h-full">
+          <p className="text-sm text-neutral-300">{task.description}</p>
+          <p className="text-sm text-neutral-400">
+            {task.date && dayjs(task.date).format("DD/MM/YYYY")}
+          </p>
+        </div>
       </header>
-      <div className="flex justify-between">
-        <Link to={`/tasks/${task._id}`}>Edit</Link>
-        <button
-          onClick={() => {
-            typeof task._id === "string" && deleteTask(task._id);
-          }}
+      <div className="flex justify-between items-center">
+        <div
+          className={`px-3 py-2 rounded-full font-semibold text-sm opacity-80
+        ${task.completed ? "bg-green-600" : "bg-rose-700"} text-white`}
         >
-          Delete
-        </button>
+          {task.completed ? "Completed" : "Incomplete"}
+        </div>
+        <div className="flex gap-2">
+          <button onClick={() => openTaskModal(task._id)}>
+            <FaEdit size={24} />
+          </button>
+          <button
+            onClick={() => {
+              typeof task._id === "string" && deleteTask(task._id);
+            }}
+          >
+            <IoTrashSharp size={24} />
+          </button>
+        </div>
       </div>
     </div>
   );

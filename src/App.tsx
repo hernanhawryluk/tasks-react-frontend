@@ -8,7 +8,7 @@ import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 
-import TaskForm from "./components/Tasks/TaskForm";
+// import TaskForm from "./components/NewTask/TaskForm";
 import Navbar from "./components/Navbar/Navbar";
 
 function App() {
@@ -16,23 +16,22 @@ function App() {
     <AuthProvider>
       <TaskProvider>
         <BrowserRouter>
-          <main className="container flex h-[100vh] w-full items-center justify-center px-10 py-10 gap-10">
+          <main className="flex flex-row w-full h-[100vh] px-10 py-10 gap-10 bg-neutral-950">
             <Navbar />
-            <div className=" h-[90%] w-full">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
 
-                <Route element={<ProtectedRoutes />}>
-                  <Route path="/tasks" element={<Tasks />} />
-                  <Route path="/tasks/new" element={<TaskForm />} />
-                  <Route path="/tasks/:id" element={<TaskForm />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="*" element={<p>There's nothing here: 404!</p>} />
-                </Route>
-              </Routes>
-            </div>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+
+              <Route element={<ProtectedRoutes />}>
+                <Route path="/tasks" element={<Tasks />} />
+                {/* <Route path="/tasks/new" element={<TaskForm />} />
+                <Route path="/tasks/:id" element={<TaskForm />} /> */}
+                <Route path="/profile" element={<Profile />} />
+                <Route path="*" element={<p>There's nothing here: 404!</p>} />
+              </Route>
+            </Routes>
           </main>
         </BrowserRouter>
       </TaskProvider>

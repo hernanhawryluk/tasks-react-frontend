@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { useTasks, Task } from "../../context/TasksContext";
-import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 import dayjs from "dayjs";
@@ -8,15 +7,14 @@ import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
 
 function TaskForm() {
+  const { taskToEdit, loader, closeTaskModal } = useTasks();
   const { register, setValue, handleSubmit } = useForm();
   const { getTask, createTask, updateTask } = useTasks();
-  const params = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const loadTask = async () => {
-      if (params.id) {
-        const task = await getTask(params.id);
+      if (taskToEdit !== "") {
+        const task = await getTask(taskToEdit);
         if (task.title) setValue("title", task.title);
         if (task.description) setValue("description", task.description);
         if (task.date)
@@ -26,7 +24,7 @@ function TaskForm() {
     loadTask();
   }, []);
 
-  const onSubmit = handleSubmit((data: Task) => {
+  const onSubmit = handleSubmit(async (data: Task) => {
     const validData = {
       ...data,
       date: data.date
@@ -34,17 +32,17 @@ function TaskForm() {
         : new Date(dayjs.utc().format()),
     };
 
-    if (params.id) {
-      updateTask(params.id, validData);
+    if (taskToEdit) {
+      updateTask(taskToEdit, validData);
     } else {
       createTask(validData);
     }
-    navigate("/tasks");
+    closeTaskModal();
   });
 
   return (
-    <div className="flex h-[calc(100vh-100px)] items-center justify-center">
-      <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
+    <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+      <div className="bg-zinc-800 w-[400px] h-[500px] p-10 rounded-xl">
         <form onSubmit={onSubmit} className="flex flex-col gap-4">
           <label htmlFor="title">Title</label>
           <input
@@ -63,7 +61,9 @@ function TaskForm() {
           />
           <label htmlFor="date">Date</label>
           <input type="date" {...register("date")} className="inputbox" />
-          <button>Save</button>
+          <button>
+            {!loader ? "Save" : taskToEdit !== "" ? "Updating" : "Creating"}
+          </button>
         </form>
       </div>
     </div>
