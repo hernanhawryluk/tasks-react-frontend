@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import Heading from "../Heading";
 dayjs.extend(utc);
 
 function TaskForm() {
@@ -42,8 +43,9 @@ function TaskForm() {
 
   return (
     <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-      <div className="bg-zinc-800 w-[400px] h-[500px] p-10 rounded-xl">
-        <form onSubmit={onSubmit} className="flex flex-col gap-4">
+      <div className="bg-zinc-800 w-[400px] h-[600px] p-6 font-semibold rounded-xl">
+        <Heading title="Create a Task" />
+        <form onSubmit={onSubmit} className="flex flex-col gap-2">
           <label htmlFor="title">Title</label>
           <input
             type="text"
