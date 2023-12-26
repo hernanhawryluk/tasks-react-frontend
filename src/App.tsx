@@ -10,13 +10,15 @@ import ProtectedRoutes from "./utils/ProtectedRoutes";
 import Navbar from "./components/Navbar/Navbar";
 import { Toaster } from "react-hot-toast";
 import { toastOptions } from "./utils/toastOptions";
+import ParticlesContainer from "./components/ParticlesContainer";
 
 function App() {
   return (
     <AuthProvider>
       <TaskProvider>
         <BrowserRouter>
-          <main className="flex flex-col w-full h-[100vh] px-10 py-10 gap-10 bg-neutral-950">
+          <ParticlesContainer />
+          <main className="flex flex-col w-full min-h-[100vh] px-10 py-10 gap-10 bg-neutral-950">
             <Toaster
               position="bottom-right"
               toastOptions={toastOptions}

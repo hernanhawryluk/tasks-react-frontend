@@ -30,7 +30,7 @@ export type Task = {
   _id?: string;
   title?: string;
   description?: string;
-  date?: Date;
+  date: Date;
   completed?: boolean;
   important?: boolean;
   updatedAt?: Date;
@@ -54,11 +54,20 @@ export function TaskProvider({ children }: TaskProviderProps) {
   const [taskToEdit, setTaskToEdit] = useState<string>("");
   const [loader, setLoader] = useState<boolean>(false);
 
+  const orderTasks = (tasksArray: Task[]) => {
+    const orderedArray = tasksArray.sort(
+      (a: Task, b: Task) =>
+        new Date(a.date).getTime() - new Date(b.date).getTime()
+    );
+    return orderedArray;
+  };
+
   const getTasks = async () => {
     setLoader(true);
     try {
       const res = await getTasksRequest();
-      setTasks(res.data);
+      const orderedTasks = orderTasks(res.data);
+      setTasks(orderedTasks);
     } catch (error) {
       console.log(error);
     }
@@ -77,7 +86,10 @@ export function TaskProvider({ children }: TaskProviderProps) {
   const createTask = async (task: Task) => {
     setLoader(true);
     const res = await createTaskRequest(task);
-    if (res.status === 200) setTasks([...tasks, res.data]);
+    if (res.status === 200) {
+      const orderedTasks = orderTasks([...tasks, res.data]);
+      setTasks(orderedTasks);
+    }
     toast.success("Task created successfully");
     setLoader(false);
     console.log(res);
@@ -87,8 +99,10 @@ export function TaskProvider({ children }: TaskProviderProps) {
     setLoader(true);
     try {
       const res = await updateTaskRequest(id, task);
-      if (res.status === 200)
+      if (res.status === 200) {
         setTasks(tasks.map((task) => (task._id === id ? res.data : task)));
+        setTasks((oldTasks) => orderTasks(oldTasks));
+      }
       toast.success("Task updated successfully");
       console.log(res);
     } catch (error) {

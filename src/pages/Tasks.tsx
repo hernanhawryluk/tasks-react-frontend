@@ -14,10 +14,8 @@ function Tasks() {
     getTasks();
   }, []);
 
-  if (tasks.length === 0) return <h1>No tasks</h1>;
-
   return (
-    <div className="bg-neutral-900 border-[1.5px] border-neutral-700 w-full rounded-xl px-8 py-8 overflow-scroll">
+    <div className="bg-neutral-900 border-[1.5px] border-neutral-700 w-full h-full rounded-xl px-8 py-8 overflow-scroll">
       <div className="flex justify-between mb-6">
         <Heading title="All Tasks" />
         <PlusButton />

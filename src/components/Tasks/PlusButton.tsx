@@ -6,7 +6,7 @@ function PlusButton() {
   return (
     <div
       onClick={() => openTaskModal()}
-      className="flex items-center justify-center border-2 border-neutral-600 rounded-full h-12 w-12 text-bold text-3xl pb-1 cursor-pointer text-neutral-400 hover:text-neutral-300 hover:bg-neutral-800 hover:scale-110 active:scale-95 transition"
+      className="flex items-center justify-center border-2 border-neutral-600 bg-neutral-950 rounded-full h-12 w-12 text-bold text-3xl pb-1 cursor-pointer text-neutral-400 hover:text-neutral-300 hover:bg-neutral-800 hover:scale-110 active:scale-95 transition z-[1]"
     >
       +
     </div>
