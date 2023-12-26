@@ -2,6 +2,7 @@ import { createContext, useState, useContext } from "react";
 import { registerRequest, loginRequest, verifyTokenRequest } from "../api/auth";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
+import toast from "react-hot-toast";
 
 export type UserSignup = {
   username: string;
@@ -46,9 +47,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     if (errors.length > 0) {
+      errors.forEach((error: any) => {
+        toast.error(error);
+      });
       const timer = setTimeout(() => {
         setErrors([]);
-      }, 5000);
+      }, 7000);
       return () => clearTimeout(timer);
     }
   }, [errors]);
@@ -88,6 +92,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const res = await registerRequest(user);
       setUser(res.data);
       setIsAuthenticated(true);
+      toast.success("Account created successfully");
     } catch (error: any) {
       console.log(error);
       setErrors(error.response.data.message);
@@ -99,6 +104,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const res = await loginRequest(user);
       setUser(res.data);
       setIsAuthenticated(true);
+      toast.success("Login successfull");
     } catch (error: any) {
       console.log(error);
       if (Array.isArray(error.response.data.message)) {
@@ -112,6 +118,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     Cookies.remove("token");
     setIsAuthenticated(false);
     setUser(null);
+    toast.success("Logout successfull");
   };
 
   return (

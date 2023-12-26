@@ -6,6 +6,7 @@ import {
   deleteTaskRequest,
   updateTaskRequest,
 } from "../api/task";
+import { toast } from "react-hot-toast";
 
 type TaskProviderProps = {
   children: React.ReactNode;
@@ -76,7 +77,8 @@ export function TaskProvider({ children }: TaskProviderProps) {
   const createTask = async (task: Task) => {
     setLoader(true);
     const res = await createTaskRequest(task);
-    if (res.status === 201) setTasks([...tasks, res.data]);
+    if (res.status === 200) setTasks([...tasks, res.data]);
+    toast.success("Task created successfully");
     setLoader(false);
     console.log(res);
   };
@@ -87,6 +89,7 @@ export function TaskProvider({ children }: TaskProviderProps) {
       const res = await updateTaskRequest(id, task);
       if (res.status === 200)
         setTasks(tasks.map((task) => (task._id === id ? res.data : task)));
+      toast.success("Task updated successfully");
       console.log(res);
     } catch (error) {
       console.log(error);
@@ -100,7 +103,9 @@ export function TaskProvider({ children }: TaskProviderProps) {
       const res = await deleteTaskRequest(id);
       console.log(res);
       if (res.status === 204) setTasks(tasks.filter((task) => task._id !== id));
+      toast.success("Task deleted successfully");
     } catch (error) {
+      toast.error("Something went wrong");
       console.log(error);
     }
     setLoader(false);

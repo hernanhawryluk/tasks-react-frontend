@@ -7,6 +7,18 @@ body {
   color: white;
 }
 
+.label {
+  @apply text-sm mb-2;
+}
+
 .inputbox {
-  @apply w-full bg-neutral-950 text-white px-4 py-2 rounded-md font-normal outline-none dark:[color-scheme:dark] mb-3;
+  @apply w-full bg-neutral-950 text-white px-4 py-3 rounded-md text-[16px] font-normal outline-none dark:[color-scheme:dark];
+}
+
+.errors {
+  @apply text-red-500 text-sm mt-1;
+}
+
+.button {
+  @apply border-[1.5px] bg-zinc-800 border-neutral-500 rounded-md py-[6px] font-semibold text-[17px] hover:bg-zinc-700 active:scale-95 transition;
 }

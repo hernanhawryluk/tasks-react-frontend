@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Heading from "../components/Heading";
 
 type FormValues = {
   email: string;
@@ -28,36 +29,37 @@ function Login() {
   });
 
   return (
-    <div className="flex h-[calc(100vh-100px)] items-center justify-center">
-      <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
-        <h1 className="text-2xl font-bold mb-4">Login</h1>
-        <form onSubmit={onSubmit} className="flex flex-col gap-4">
-          {LoginErrors &&
-            LoginErrors.map((error: string, index: number) => {
-              return (
-                <p className="text-red-500" key={index}>
-                  {error}
-                </p>
-              );
-            })}
+    <div className="flex h-[calc(100vh-240px)] items-center justify-center">
+      <div className="bg-zinc-800 max-w-lg w-full p-10 rounded-xl border-[1.5px] border-neutral-600">
+        <div className="mb-6">
+          <Heading title="Login" />
+        </div>
+        <form onSubmit={onSubmit} className="flex flex-col">
+          <label htmlFor="email" className="label">
+            Email
+          </label>
           <input
             type="email"
             {...register("email", {
               required: true,
               maxLength: 35,
             })}
+            autoComplete="off"
             placeholder="Email"
             className={`inputbox
-          ${errors.email && "border-2 border-red-500"}`}
+            ${errors.email && "border-2 border-red-500"}`}
           />
+
           {errors.email && (
-            <p className="text-red-500">
+            <p className="errors">
               {errors.email?.type === "required"
                 ? "Email is required"
                 : "Email must be less than 35 characters"}
             </p>
           )}
-
+          <label htmlFor="password" className="label mt-4">
+            Password
+          </label>
           <input
             type="password"
             {...register("password", {
@@ -66,19 +68,22 @@ function Login() {
               maxLength: 20,
             })}
             placeholder="Password"
-            className={`inputbox
+            className={`inputbox 
           ${errors.password && "border-2 border-red-500"}`}
           />
           {errors.password && (
-            <p className="text-red-500">
+            <p className="errors">
               {errors.password?.type === "required"
                 ? "Password is required"
                 : "Password must be between 6 and 20 characters"}
             </p>
           )}
-          <button type="submit">Login</button>
+
+          <button type="submit" className="button mt-6">
+            Login
+          </button>
         </form>
-        <p className="text-center">
+        <p className="text-center mt-6">
           Don't have an account?{" "}
           <Link to="/register" className="text-sky-500">
             Sign up

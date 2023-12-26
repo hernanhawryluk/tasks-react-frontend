@@ -36,7 +36,7 @@ function TaskCard({ task }: { task: Task }) {
           className={`px-3 py-2 rounded-full font-semibold text-sm opacity-80
         ${task.completed ? "bg-green-600" : "bg-rose-700"} text-white`}
         >
-          {task.completed ? "Completed" : "Incomplete"}
+          {task.date ? "Completed" : "Incomplete"}
         </div>
         <div className="flex gap-2">
           <button onClick={() => openTaskModal(task._id)}>
