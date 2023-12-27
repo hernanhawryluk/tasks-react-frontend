@@ -10,26 +10,21 @@ const ParticlesContainer = () => {
 
   return (
     <Particles
-      className="w-full h-[97%] absolute translate-z-0 -z-3"
+      className="w-full h-full absolute translate-z-0 bg-gradient-to-b from-[#282a36] to-[#454a64] "
       id="tsparticles"
       init={particlesInit}
       options={{
         fullScreen: { enable: false },
-        background: {
-          color: {
-            value: "",
-          },
-        },
         fpsLimit: 120,
         particles: {
           color: {
-            value: "#7FA6EE",
+            value: "#5f6795",
           },
           links: {
-            color: "#C1A1D3",
+            color: "#727aa8",
             distance: 150,
             enable: true,
-            opacity: 0.1,
+            opacity: 0.7,
             width: 1,
           },
           collisions: {
@@ -53,7 +48,7 @@ const ParticlesContainer = () => {
             value: 80,
           },
           opacity: {
-            value: 0.1,
+            value: 0.3,
           },
           shape: {
             type: "circle",

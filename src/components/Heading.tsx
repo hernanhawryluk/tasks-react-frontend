@@ -4,7 +4,7 @@ type HeadingProps = {
 
 const Heading = ({ title }: HeadingProps) => {
   return (
-    <div>
+    <div className="z-[1] relative">
       <div className="text-2xl mb-2 font-bold">{title}</div>
       <div className="h-1 w-12 bg-emerald-400 opacity-60 rounded-full"></div>
     </div>

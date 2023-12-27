@@ -6,36 +6,43 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
+import Calendar from "./pages/Calendar";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import Navbar from "./components/Navbar/Navbar";
 import { Toaster } from "react-hot-toast";
 import { toastOptions } from "./utils/toastOptions";
 import ParticlesContainer from "./components/ParticlesContainer";
+import Footer from "./components/Footer/Footer";
+import Container from "./components/Container";
 
 function App() {
   return (
     <AuthProvider>
       <TaskProvider>
         <BrowserRouter>
-          <ParticlesContainer />
-          <main className="flex flex-col w-full min-h-[100vh] px-10 py-10 gap-10 bg-neutral-950">
+          <main className="flex flex-col w-full min-h-[100vh] gap-10 bg-neutral-950 relative">
             <Toaster
               position="bottom-right"
               toastOptions={toastOptions}
               reverseOrder={false}
             />
             <Navbar />
+            <ParticlesContainer />
+            <Container>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route element={<ProtectedRoutes />}>
+                  <Route path="/tasks" element={<Tasks />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/calendar" element={<Calendar />} />
+                  <Route path="*" element={<p>There's nothing here: 404!</p>} />
+                </Route>
+              </Routes>
+            </Container>
 
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route element={<ProtectedRoutes />}>
-                <Route path="/tasks" element={<Tasks />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="*" element={<p>There's nothing here: 404!</p>} />
-              </Route>
-            </Routes>
+            <Footer />
           </main>
         </BrowserRouter>
       </TaskProvider>
