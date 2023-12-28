@@ -31,8 +31,15 @@ const darkTheme = createTheme({
       fontWeight: 600,
     },
   },
-  shape: {
-    borderRadius: 4,
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          padding: "7px 16px",
+          borderRadius: 4,
+        },
+      },
+    },
   },
 });
 
@@ -52,24 +59,30 @@ const AlertDialog = ({
         aria-labelledby={title}
         aria-describedby={description}
       >
-        <DialogTitle id={title}>{title}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id={description}>{description}</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDialogClose}>Cancel</Button>
-          <Button
-            variant="contained"
-            color="error"
-            onClick={() => {
-              onConfirm();
-              handleDialogClose();
-            }}
-            autoFocus
-          >
-            {confirmButtonText}
-          </Button>
-        </DialogActions>
+        <div className="p-[1px] rounded-lg bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700">
+          <div className="bg-zinc-800 rounded-lg pl-4 pr-8 py-2">
+            <DialogTitle id={title}>{title}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id={description}>
+                {description}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleDialogClose}>Cancel</Button>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => {
+                  onConfirm();
+                  handleDialogClose();
+                }}
+                autoFocus
+              >
+                {confirmButtonText}
+              </Button>
+            </DialogActions>
+          </div>
+        </div>
       </Dialog>
     </ThemeProvider>
   );

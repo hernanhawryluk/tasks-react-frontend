@@ -4,7 +4,6 @@ import { TaskProvider } from "./context/TasksContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Profile from "./pages/Profile";
 import Tasks from "./pages/Tasks";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import Navbar from "./components/Navbar/Navbar";
@@ -19,7 +18,7 @@ function App() {
     <AuthProvider>
       <TaskProvider>
         <BrowserRouter>
-          <main className="flex flex-col w-full min-h-[100vh] gap-10 bg-neutral-950 relative">
+          <main className="flex flex-col w-full min-h-[100vh] gap-10 bg-neutral-950 relative overflow-x-hidden">
             <Toaster
               position="bottom-right"
               toastOptions={toastOptions}
@@ -33,7 +32,6 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route element={<ProtectedRoutes />}>
-                  <Route path="/profile" element={<Profile />} />
                   <Route path="/tasks" element={<Tasks />} />
                   <Route path="*" element={<p>There's nothing here: 404!</p>} />
                 </Route>

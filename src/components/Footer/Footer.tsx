@@ -2,7 +2,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 function Footer() {
   return (
-    <div className="flex h-[52px] w-full bg-neutral-900 border-t-[2px] border-neutral-700 items-center justify-between px-8 z-[1] absolute bottom-0 text-xs">
+    <div className="flex h-[52px] w-full bg-neutral-900 border-t-[2px] border-neutral-700 items-center justify-between px-8 z-[1] absolute bottom-0 text-xs 2xl:px-[15%]">
       <span className="">Hernan Hawryluk - All rights reserved © 2023</span>
       <div className="flex gap-8 z-[1]">
         <a

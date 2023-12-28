@@ -24,7 +24,7 @@ function TaskPanel() {
         {tasks.map((task: Task) => (
           <TaskCard task={task} key={task._id} />
         ))}
-        <TaskAddCard />
+        {tasks.length === 0 && <TaskAddCard />}
       </div>
       <Modal
         open={taskModal}
