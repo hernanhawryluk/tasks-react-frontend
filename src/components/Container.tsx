@@ -1,11 +1,9 @@
-import React from "react";
-
 type ContainerProps = {
   children: React.ReactNode;
 };
 
 function Container({ children }: ContainerProps) {
-  return <div className="px-8">{children}</div>;
+  return <div className="px-10">{children}</div>;
 }
 
 export default Container;

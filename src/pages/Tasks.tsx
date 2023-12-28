@@ -1,40 +1,32 @@
-import { useEffect } from "react";
-import { Task, useTasks } from "../context/TasksContext";
-import TaskCard from "../components/Tasks/TaskCard";
-import TaskAddCard from "../components/Tasks/TaskAddCard";
+import FastNotes from "../components/Calendar/FastNotes";
+import TaskCalendar from "../components/Calendar/TaskCalendar";
 import Heading from "../components/Heading";
-import PlusButton from "../components/Tasks/PlusButton";
-import { Modal } from "@mui/material";
-import TaskForm from "../components/NewTask/TaskForm";
+import TaskPanel from "../components/Tasks/TaskPanel";
 
 function Tasks() {
-  const { tasks, taskModal, closeTaskModal, getTasks } = useTasks();
-
-  useEffect(() => {
-    getTasks();
-  }, []);
-
   return (
-    <div className="flex flex-col min-h-[78vh] border-[1.5px] border-neutral-700 w-full rounded-xl px-8 py-5 overflow-hidden relative ">
-      <div className="flex justify-between mb-6">
-        <Heading title="Tasks" />
-        <PlusButton />
+    <div className="flex gap-8 mb-[92px] mt-[-44px]">
+      <div className="flex flex-col gap-8">
+        <div className="flex flex-col rounded-xl w-[380px] border-[1.5px] border-neutral-700 relative pb-4">
+          <div className="pt-5 pl-8 pb-2">
+            <Heading title={"Calendar"} />
+          </div>
+
+          <TaskCalendar />
+          <div className="absolute inset-0 bg-neutral-950 opacity-50 rounded-xl" />
+        </div>
+        <div className="flex flex-col rounded-xl w-[380px] border-[1.5px] border-neutral-700 h-full relative px-8">
+          <div className="px-1 pt-5 h-full mb-20">
+            <Heading title="Fast notes" />
+            <div className="pt-4 relative z-[1] h-full">
+              <FastNotes />
+            </div>
+          </div>
+          <div className="absolute inset-0 bg-neutral-950 opacity-50 rounded-xl z-0" />
+        </div>
       </div>
-      <div className="flex flex-wrap gap-8">
-        {tasks.map((task: Task) => (
-          <TaskCard task={task} key={task._id} />
-        ))}
-        <TaskAddCard />
-      </div>
-      <Modal
-        open={taskModal}
-        onClose={closeTaskModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <TaskForm />
-      </Modal>
-      <div className="absolute inset-0 bg-neutral-950 opacity-50 rounded-xl z-0" />
+
+      <TaskPanel />
     </div>
   );
 }

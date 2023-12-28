@@ -4,15 +4,14 @@ import { TaskProvider } from "./context/TasksContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
-import Calendar from "./pages/Calendar";
+import Tasks from "./pages/Tasks";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import Navbar from "./components/Navbar/Navbar";
 import { Toaster } from "react-hot-toast";
 import { toastOptions } from "./utils/toastOptions";
-import ParticlesContainer from "./components/ParticlesContainer";
 import Footer from "./components/Footer/Footer";
+import Background from "./components/Background";
 import Container from "./components/Container";
 
 function App() {
@@ -27,21 +26,19 @@ function App() {
               reverseOrder={false}
             />
             <Navbar />
-            <ParticlesContainer />
+            <Background />
             <Container>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route element={<ProtectedRoutes />}>
-                  <Route path="/tasks" element={<Tasks />} />
                   <Route path="/profile" element={<Profile />} />
-                  <Route path="/calendar" element={<Calendar />} />
+                  <Route path="/tasks" element={<Tasks />} />
                   <Route path="*" element={<p>There's nothing here: 404!</p>} />
                 </Route>
               </Routes>
             </Container>
-
             <Footer />
           </main>
         </BrowserRouter>

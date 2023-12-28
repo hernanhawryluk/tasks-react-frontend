@@ -1,40 +1,36 @@
-import { IoHomeSharp } from "react-icons/io5";
-import { FaCalendarAlt, FaSignOutAlt } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { FaSignOutAlt } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
+import AlertDialog from "../AlertDialog";
 
 function AuthLinks() {
   const { logout } = useAuth();
-  const location = useLocation();
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+
+  const handleLogout = () => {
+    logout();
+  };
+
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+  };
 
   return (
     <>
       <li
-        className={`highlight
-          ${
-            location.pathname === "/tasks"
-              ? "text-neutral-50"
-              : "text-neutral-400"
-          }`}
-      >
-        <Link to={"/tasks"}>Tasks</Link>
-      </li>
-      <li
-        className={`highlight
-          ${
-            location.pathname === "/calendar"
-              ? "text-neutral-50"
-              : "text-neutral-400"
-          }`}
-      >
-        <Link to={"/calendar"}>Calendar</Link>
-      </li>
-      <li
-        onClick={() => logout()}
+        onClick={() => setOpenDialog(true)}
         className="text-neutral-400 cursor-pointer highlight"
       >
-        Logout
+        <FaSignOutAlt size={26} />
       </li>
+      <AlertDialog
+        openDialog={openDialog}
+        title="Logout"
+        description="Are you sure you want to logout?"
+        confirmButtonText="Logout"
+        onConfirm={handleLogout}
+        handleDialogClose={handleDialogClose}
+      />
     </>
   );
 }

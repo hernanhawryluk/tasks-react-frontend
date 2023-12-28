@@ -30,7 +30,7 @@ function Register() {
   });
 
   return (
-    <div className="flex h-[calc(100vh-240px)] items-center justify-center relative z-[1]">
+    <div className="flex h-[calc(100vh-300px)] items-center justify-center relative z-[1]">
       <div className="bg-zinc-800 max-w-lg w-full p-10 rounded-xl border-[1.5px] border-neutral-600">
         <div className="mb-6">
           <Heading title="Register" />
