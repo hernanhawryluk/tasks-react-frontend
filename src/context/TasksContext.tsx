@@ -17,12 +17,13 @@ type TaskContextType = {
   taskToEdit: string;
   taskModal: boolean;
   loader: boolean;
+  createOnDay: Date;
   createTask: (task: Task) => void;
   deleteTask: (id: string) => void;
   updateTask: (id: string, task: Task) => void;
   getTasks: () => void;
   getTask: (id: string) => Promise<Task>;
-  openTaskModal: (id?: string) => void;
+  openTaskModal: (date: Date, id?: string) => void;
   closeTaskModal: () => void;
 };
 
@@ -52,6 +53,7 @@ export function TaskProvider({ children }: TaskProviderProps) {
   const [tasks, setTasks] = useState<Task[] | []>([]);
   const [taskModal, setTaskModal] = useState<boolean>(false);
   const [taskToEdit, setTaskToEdit] = useState<string>("");
+  const [createOnDay, setCreateOnDay] = useState<Date>(new Date());
   const [loader, setLoader] = useState<boolean>(false);
 
   const orderTasks = (tasksArray: Task[]) => {
@@ -125,8 +127,13 @@ export function TaskProvider({ children }: TaskProviderProps) {
     setLoader(false);
   };
 
-  const openTaskModal = (id?: string) => {
-    if (id) setTaskToEdit(id);
+  const openTaskModal = (selectedDay: Date, id?: string) => {
+    if (selectedDay) {
+      setCreateOnDay(new Date(selectedDay));
+    }
+    if (id) {
+      setTaskToEdit(id);
+    }
     setTaskModal(true);
   };
 
@@ -141,6 +148,7 @@ export function TaskProvider({ children }: TaskProviderProps) {
         tasks,
         taskModal,
         taskToEdit,
+        createOnDay,
         loader,
         createTask,
         getTasks,

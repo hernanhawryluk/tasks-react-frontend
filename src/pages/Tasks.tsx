@@ -2,8 +2,13 @@ import FastNotes from "../components/Calendar/FastNotes";
 import TaskCalendar from "../components/Calendar/TaskCalendar";
 import Heading from "../components/Heading";
 import TaskPanel from "../components/Tasks/TaskPanel";
+import { Modal } from "@mui/material";
+import TaskForm from "../components/NewTask/TaskForm";
+import { useTasks } from "../context/TasksContext";
 
 function Tasks() {
+  const { taskModal, closeTaskModal } = useTasks();
+
   return (
     <div className="flex gap-8 mb-[92px] mt-[-44px]">
       <div className="flex flex-col gap-8">
@@ -27,6 +32,16 @@ function Tasks() {
       </div>
 
       <TaskPanel />
+      <Modal
+        open={taskModal}
+        onClose={closeTaskModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div>
+          <TaskForm />
+        </div>
+      </Modal>
     </div>
   );
 }

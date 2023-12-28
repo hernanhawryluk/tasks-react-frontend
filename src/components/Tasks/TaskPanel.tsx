@@ -4,11 +4,9 @@ import TaskCard from "./TaskCard";
 import TaskAddCard from "./TaskAddCard";
 import Heading from "../Heading";
 import PlusButton from "./PlusButton";
-import { Modal } from "@mui/material";
-import TaskForm from "../NewTask/TaskForm";
 
 function TaskPanel() {
-  const { tasks, taskModal, closeTaskModal, getTasks } = useTasks();
+  const { tasks, getTasks } = useTasks();
 
   useEffect(() => {
     getTasks();
@@ -26,14 +24,7 @@ function TaskPanel() {
         ))}
         {tasks.length === 0 && <TaskAddCard />}
       </div>
-      <Modal
-        open={taskModal}
-        onClose={closeTaskModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <TaskForm />
-      </Modal>
+
       <div className="absolute inset-0 bg-neutral-950 opacity-50 rounded-xl z-0" />
     </div>
   );

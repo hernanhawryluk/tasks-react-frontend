@@ -1,22 +1,24 @@
 import { useForm } from "react-hook-form";
-import { useTasks, Task } from "../../context/TasksContext";
+import { useTasks } from "../../context/TasksContext";
 import { useEffect } from "react";
 
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import Heading from "../Heading";
 import { IoCloseCircle } from "react-icons/io5";
+import toast from "react-hot-toast";
 dayjs.extend(utc);
 
 type FieldValuesProps = {
   title: string;
   description: string;
-  date: Date | string;
+  date: string | Date;
 };
 
 function TaskForm() {
-  const { taskToEdit, loader, closeTaskModal } = useTasks();
-  const { register, setValue, handleSubmit } = useForm<FieldValuesProps>();
+  const { taskToEdit, createOnDay, loader, closeTaskModal } = useTasks();
+  const { register, setValue, handleSubmit, formState } =
+    useForm<FieldValuesProps>();
   const { getTask, createTask, updateTask } = useTasks();
 
   useEffect(() => {
@@ -27,6 +29,8 @@ function TaskForm() {
         if (task.description) setValue("description", task.description);
         if (task.date)
           setValue("date", dayjs(task.date).utc().format("YYYY-MM-DD"));
+      } else if (createOnDay) {
+        setValue("date", dayjs(createOnDay).utc().format("YYYY-MM-DD"));
       } else {
         setValue("date", dayjs(new Date()).utc().format("YYYY-MM-DD"));
       }
@@ -34,7 +38,19 @@ function TaskForm() {
     loadTask();
   }, []);
 
-  const onSubmit = handleSubmit(async (data: Task) => {
+  useEffect(() => {
+    if (formState.errors.title) {
+      toast.error("Title is required");
+    }
+    if (formState.errors.description) {
+      toast.error("Description is required");
+    }
+    if (formState.errors.date) {
+      toast.error("Date is required");
+    }
+  }, [formState]);
+
+  const onSubmit = handleSubmit(async (data: FieldValuesProps) => {
     const validData = {
       ...data,
       date: data.date

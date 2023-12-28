@@ -9,13 +9,16 @@ import Badge from "@mui/material/Badge";
 import { PickersDay, PickersDayProps } from "@mui/x-date-pickers/PickersDay";
 import { DayCalendarSkeleton } from "@mui/x-date-pickers/DayCalendarSkeleton";
 import { useTasks } from "../../context/TasksContext";
+import { useCalendar } from "../../context/CalendarContext";
 
 function TaskCalendar() {
-  const { tasks, getTasks } = useTasks();
+  const { highlightedDay, handleChangeHighlightDay } = useCalendar();
+  const { tasks, getTasks, openTaskModal } = useTasks();
 
   const [isLoading, setIsLoading] = useState(false);
   const [highlightedDays, setHighlightedDays] = useState<number[]>([]);
-  const [value, setValue] = useState<Dayjs | null>(dayjs(new Date()));
+  const [dobleClickTimer, setDobleClickTimer] = useState(false);
+  const initialValue = dayjs(new Date());
 
   useEffect(() => {
     getTasks();
@@ -63,7 +66,15 @@ function TaskCalendar() {
       <Badge
         key={props.day.toString()}
         overlap="circular"
-        badgeContent={isSelected ? "🔵" : undefined}
+        badgeContent={
+          !isSelected
+            ? undefined
+            : dayjs(props.day) < dayjs().subtract(1, "day")
+            ? "🔴"
+            : dayjs(props.day) > dayjs()
+            ? "🔵"
+            : "🟢"
+        }
       >
         <PickersDay
           {...other}
@@ -86,14 +97,24 @@ function TaskCalendar() {
       <ThemeProvider theme={darkTheme}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateCalendar
-            defaultValue={value}
+            defaultValue={initialValue}
             loading={isLoading}
             onMonthChange={handleMonthChange}
             renderLoading={() => <DayCalendarSkeleton />}
             showDaysOutsideCurrentMonth
             fixedWeekNumber={6}
-            value={value}
-            onChange={(value: Dayjs | null) => setValue(value)}
+            value={highlightedDay}
+            onChange={(selectedDay: Dayjs | null) => {
+              if (dobleClickTimer) {
+                openTaskModal(selectedDay?.toDate() as Date);
+              } else {
+                handleChangeHighlightDay(dayjs(selectedDay));
+                setDobleClickTimer(true);
+                setTimeout(() => {
+                  setDobleClickTimer(false);
+                }, 400);
+              }
+            }}
             slots={{
               day: ServerDay,
             }}

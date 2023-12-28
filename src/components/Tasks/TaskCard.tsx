@@ -6,10 +6,12 @@ import AlertDialog from "../AlertDialog";
 
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import { useCalendar } from "../../context/CalendarContext";
 dayjs.extend(utc);
 
 function TaskCard({ task }: { task: Task }) {
   const { openTaskModal, deleteTask } = useTasks();
+  const { handleChangeHighlightDay } = useCalendar();
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   const handleDialogClose = () => {
@@ -71,7 +73,8 @@ function TaskCard({ task }: { task: Task }) {
         </header>
         <div className="flex justify-between items-center">
           <div
-            className={`rounded-full font-bold text-sm text-white flex justify-center items-center h-[32px] w-[110px] border-[2px]
+            onClick={() => handleChangeHighlightDay(dayjs(task.date))}
+            className={`rounded-full font-bold text-sm text-white flex justify-center items-center h-[32px] w-[110px] border-[2px] cursor-pointer
         ${task.date && colorForDate(task.date)}
         `}
           >
@@ -79,7 +82,7 @@ function TaskCard({ task }: { task: Task }) {
           </div>
           <div className="flex gap-2">
             <button
-              onClick={() => openTaskModal(task._id)}
+              onClick={() => openTaskModal(task.date, task._id)}
               className="cursor-pointer text-neutral-300 hover:text-neutral-100 transition hover:scale-110 active:scale-95"
             >
               <FaEdit size={24} />
