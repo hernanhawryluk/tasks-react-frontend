@@ -7,28 +7,33 @@ function AuthLinks() {
   const { logout } = useAuth();
   const location = useLocation();
 
-  const boxes =
-    "flex gap-2 items-center font-semibold text-neutral-400 hover:text-neutral-300 transition cursor-pointer";
   return (
     <>
-      <li className={boxes}>
-        <Link to={"/tasks"}>
-          <IoHomeSharp
-            size={22}
-            color={location.pathname === "/tasks" ? "#fff" : "#666"}
-          />
-        </Link>
+      <li
+        className={`highlight
+          ${
+            location.pathname === "/tasks"
+              ? "text-neutral-50"
+              : "text-neutral-400"
+          }`}
+      >
+        <Link to={"/tasks"}>Tasks</Link>
       </li>
-      <li className={boxes}>
-        <Link to={"/calendar"}>
-          <FaCalendarAlt
-            size={20}
-            color={location.pathname === "/calendar" ? "#fff" : "#666"}
-          />
-        </Link>
+      <li
+        className={`highlight
+          ${
+            location.pathname === "/calendar"
+              ? "text-neutral-50"
+              : "text-neutral-400"
+          }`}
+      >
+        <Link to={"/calendar"}>Calendar</Link>
       </li>
-      <li onClick={() => logout()} className={boxes}>
-        <FaSignOutAlt size={24} />
+      <li
+        onClick={() => logout()}
+        className="text-neutral-400 cursor-pointer highlight"
+      >
+        Logout
       </li>
     </>
   );

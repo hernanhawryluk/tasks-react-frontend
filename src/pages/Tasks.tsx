@@ -34,7 +34,7 @@ function Tasks() {
       >
         <TaskForm />
       </Modal>
-      <div className="absolute inset-0 bg-neutral-900 opacity-90 rounded-xl z-0" />
+      <div className="absolute inset-0 bg-neutral-950 opacity-50 rounded-xl z-0" />
     </div>
   );
 }
