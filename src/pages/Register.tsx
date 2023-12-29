@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Heading from "../components/Heading";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 type FormValues = {
   username: string;
@@ -11,6 +12,8 @@ type FormValues = {
 };
 
 function Register() {
+  const [passwordHidden, setPasswordHidden] = useState<boolean>(true);
+
   const {
     register,
     handleSubmit,
@@ -30,9 +33,9 @@ function Register() {
   });
 
   return (
-    <div className="flex h-[calc(100vh-300px)] items-center justify-center relative z-[1]">
+    <div className="flex h-[calc(100vh-300px)] items-center justify-center relative z-[2]">
       <div className="absolute bg-zinc-800 max-w-lg w-full p-[0.6px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-700 to-pink-500">
-        <div className="bg-zinc-800 max-w-lg w-full p-10 rounded-xl border-[1.5px] border-neutral-600">
+        <div className="bg-zinc-800 max-w-lg w-full p-7 sm:p-10 rounded-xl border-[1.5px] border-neutral-600">
           <div className="mb-6">
             <Heading title="Register" />
           </div>
@@ -88,18 +91,31 @@ function Register() {
                 );
               })
             )}
-            <label htmlFor="password" className="label  mt-4">
+            <label htmlFor="password" className="label mt-4 relative">
               Password
+              <div className="absolute right-4 top-[42px] cursor-pointer text-neutral-300">
+                {passwordHidden ? (
+                  <FaEye
+                    size={20}
+                    onClick={() => setPasswordHidden(!passwordHidden)}
+                  />
+                ) : (
+                  <FaEyeSlash
+                    size={20}
+                    onClick={() => setPasswordHidden(!passwordHidden)}
+                  />
+                )}
+              </div>
             </label>
             <input
-              type="password"
+              type={passwordHidden ? "password" : "text"}
               {...register("password", {
                 required: true,
                 minLength: 6,
                 maxLength: 20,
               })}
               placeholder="Password"
-              className={`inputbox
+              className={`inputbox 
           ${errors.password && "border-2 border-red-500"}`}
             />
             {errors.password && (

@@ -10,7 +10,7 @@ function Tasks() {
   const { taskModal, closeTaskModal } = useTasks();
 
   return (
-    <div className="flex gap-8 mb-[92px] mt-[-44px]">
+    <div className="flex flex-col sm:flex-row gap-8 mb-[92px] mt-[-64px] sm:mt-[-44px]">
       <div className="flex flex-col gap-8">
         <div className="flex flex-col rounded-xl w-[380px] border-[1.5px] border-neutral-700 relative pb-4">
           <div className="pt-5 pl-8 pb-2">

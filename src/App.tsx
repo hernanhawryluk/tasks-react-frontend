@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { TaskProvider } from "./context/TasksContext";
-import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Tasks from "./pages/Tasks";
@@ -22,7 +21,7 @@ function App() {
         <TaskProvider>
           <NotesProvider>
             <BrowserRouter>
-              <main className="flex flex-col w-full min-h-[100vh] gap-10 bg-neutral-950 relative overflow-x-hidden">
+              <main className="flex flex-col w-full min-h-[100vh] gap-[50px] sm:gap-10 bg-neutral-950 relative overflow-x-hidden">
                 <Toaster
                   position="bottom-right"
                   toastOptions={toastOptions}
@@ -32,7 +31,6 @@ function App() {
                 <Background />
                 <Container>
                   <Routes>
-                    <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route element={<ProtectedRoutes />}>
