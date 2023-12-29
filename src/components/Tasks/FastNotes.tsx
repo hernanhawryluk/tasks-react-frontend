@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useTasks } from "../../context/TasksContext";
+import { useNotes } from "../../context/NotesContext";
 
 function FastNotes() {
   const [value, setValue] = useState<string>("");
-  const { notes, getNotes, saveNotes } = useTasks();
+  const { notes, getNotes, saveNotes } = useNotes();
 
   useEffect(() => {
     getNotes();

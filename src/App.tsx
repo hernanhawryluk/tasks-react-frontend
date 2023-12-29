@@ -13,38 +13,41 @@ import Footer from "./components/Footer/Footer";
 import Background from "./components/Background";
 import Container from "./components/Container";
 import { CalendarProvider } from "./context/CalendarContext";
+import { NotesProvider } from "./context/NotesContext";
 
 function App() {
   return (
     <AuthProvider>
       <CalendarProvider>
         <TaskProvider>
-          <BrowserRouter>
-            <main className="flex flex-col w-full min-h-[100vh] gap-10 bg-neutral-950 relative overflow-x-hidden">
-              <Toaster
-                position="bottom-right"
-                toastOptions={toastOptions}
-                reverseOrder={false}
-              />
-              <Navbar />
-              <Background />
-              <Container>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route element={<ProtectedRoutes />}>
-                    <Route path="/tasks" element={<Tasks />} />
-                    <Route
-                      path="*"
-                      element={<p>There's nothing here: 404!</p>}
-                    />
-                  </Route>
-                </Routes>
-              </Container>
-              <Footer />
-            </main>
-          </BrowserRouter>
+          <NotesProvider>
+            <BrowserRouter>
+              <main className="flex flex-col w-full min-h-[100vh] gap-10 bg-neutral-950 relative overflow-x-hidden">
+                <Toaster
+                  position="bottom-right"
+                  toastOptions={toastOptions}
+                  reverseOrder={false}
+                />
+                <Navbar />
+                <Background />
+                <Container>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route element={<ProtectedRoutes />}>
+                      <Route path="/tasks" element={<Tasks />} />
+                      <Route
+                        path="*"
+                        element={<p>There's nothing here: 404!</p>}
+                      />
+                    </Route>
+                  </Routes>
+                </Container>
+                <Footer />
+              </main>
+            </BrowserRouter>
+          </NotesProvider>
         </TaskProvider>
       </CalendarProvider>
     </AuthProvider>

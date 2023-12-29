@@ -5,8 +5,6 @@ import {
   getTaskRequest,
   deleteTaskRequest,
   updateTaskRequest,
-  getNotesRequest,
-  updateNotesRequest,
 } from "../api/task";
 import { toast } from "react-hot-toast";
 
@@ -16,7 +14,6 @@ type TaskProviderProps = {
 
 type TaskContextType = {
   tasks: Task[];
-  notes: string;
   taskToEdit: string;
   taskModal: boolean;
   loader: boolean;
@@ -24,8 +21,6 @@ type TaskContextType = {
   createTask: (task: Task) => void;
   deleteTask: (id: string) => void;
   updateTask: (id: string, task: Task) => void;
-  getNotes: () => void;
-  saveNotes: (notes: string) => void;
   getTasks: () => void;
   getTask: (id: string) => Promise<Task>;
   openTaskModal: (date: Date, id?: string) => void;
@@ -56,7 +51,6 @@ export const useTasks = () => {
 
 export function TaskProvider({ children }: TaskProviderProps) {
   const [tasks, setTasks] = useState<Task[] | []>([]);
-  const [notes, setNotes] = useState<string>("");
   const [taskModal, setTaskModal] = useState<boolean>(false);
   const [taskToEdit, setTaskToEdit] = useState<string>("");
   const [createOnDay, setCreateOnDay] = useState<Date>(new Date());
@@ -100,7 +94,6 @@ export function TaskProvider({ children }: TaskProviderProps) {
     }
     toast.success("Task created successfully");
     setLoader(false);
-    console.log(res);
   };
 
   const updateTask = async (id: string, task: Task) => {
@@ -112,7 +105,6 @@ export function TaskProvider({ children }: TaskProviderProps) {
         setTasks((oldTasks) => orderTasks(oldTasks));
       }
       toast.success("Task updated successfully");
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -123,7 +115,6 @@ export function TaskProvider({ children }: TaskProviderProps) {
     setLoader(true);
     try {
       const res = await deleteTaskRequest(id);
-      console.log(res);
       if (res.status === 204) setTasks(tasks.filter((task) => task._id !== id));
       toast.success("Task deleted successfully");
     } catch (error) {
@@ -131,28 +122,6 @@ export function TaskProvider({ children }: TaskProviderProps) {
       console.log(error);
     }
     setLoader(false);
-  };
-
-  const getNotes = async () => {
-    try {
-      const res = await getNotesRequest();
-      setNotes(res.data.notes);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const saveNotes = async (notes: string) => {
-    try {
-      const res = await updateNotesRequest(notes);
-      if (res.status === 200) {
-        console.log(res.data);
-        toast.success("Notes saved successfully");
-      }
-    } catch (error) {
-      toast.error("Something went wrong");
-      console.log(error);
-    }
   };
 
   const openTaskModal = (selectedDay: Date, id?: string) => {
@@ -174,7 +143,6 @@ export function TaskProvider({ children }: TaskProviderProps) {
     <TaskContext.Provider
       value={{
         tasks,
-        notes,
         taskModal,
         taskToEdit,
         createOnDay,
@@ -184,8 +152,6 @@ export function TaskProvider({ children }: TaskProviderProps) {
         getTask,
         updateTask,
         deleteTask,
-        getNotes,
-        saveNotes,
         openTaskModal,
         closeTaskModal,
       }}
