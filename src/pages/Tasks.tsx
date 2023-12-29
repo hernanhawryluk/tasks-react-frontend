@@ -1,5 +1,5 @@
-import FastNotes from "../components/Calendar/FastNotes";
-import TaskCalendar from "../components/Calendar/TaskCalendar";
+import FastNotes from "../components/Tasks/FastNotes";
+import TaskCalendar from "../components/Tasks/TaskCalendar";
 import Heading from "../components/Heading";
 import TaskPanel from "../components/Tasks/TaskPanel";
 import { Modal } from "@mui/material";
