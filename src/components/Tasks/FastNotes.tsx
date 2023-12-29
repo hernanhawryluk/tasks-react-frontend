@@ -14,14 +14,14 @@ function FastNotes() {
   }, [notes]);
 
   return (
-    <div className="flex flex-col gap-4 mb-6 h-full">
+    <div className="flex flex-col gap-4 mb-6 sm:mb-0 lg:mb-6 h-full">
       <textarea
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="Notes..."
-        className="inputbox border border-neutral-500 min-h-[92px] h-full resize-none"
+        className="inputbox border border-neutral-500 min-h-[140px] sm:min-h-[260px] lg:min-h-[92px] max-h-auto h-full resize-none"
       />
-      <button onClick={() => saveNotes(value)} className="button ">
+      <button onClick={() => saveNotes(value)} className="button">
         Save
       </button>
     </div>

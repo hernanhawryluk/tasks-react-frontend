@@ -17,12 +17,12 @@ function AuthLinks() {
 
   return (
     <>
-      <li
+      <div
         onClick={() => setOpenDialog(true)}
-        className="text-neutral-400 cursor-pointer highlight"
+        className="text-neutral-400 cursor-pointer highlight text-[24px] sm:text-[30px]"
       >
-        <FaSignOutAlt size={26} />
-      </li>
+        <FaSignOutAlt />
+      </div>
       <AlertDialog
         openDialog={openDialog}
         title="Logout"

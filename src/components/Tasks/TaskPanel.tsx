@@ -13,16 +13,16 @@ function TaskPanel() {
   }, []);
 
   return (
-    <div className="flex flex-col border-[1.5px] border-neutral-700 w-full rounded-xl px-8 py-5 overflow-hidden relative">
+    <div className="flex flex-col border-[1.5px] border-neutral-700 w-full rounded-xl px-6 sm:px-8 pt-5 pb-8 overflow-hidden relative">
       <div className="flex justify-between mb-6">
         <Heading title="Tasks" />
         <PlusButton />
       </div>
-      <div className="flex flex-wrap gap-8">
+      <div className="flex flex-wrap gap-5">
         {tasks.map((task: Task) => (
           <TaskCard task={task} key={task._id} />
         ))}
-        {tasks.length === 0 && <TaskAddCard />}
+        <TaskAddCard />
       </div>
 
       <div className="absolute inset-0 bg-neutral-950 opacity-50 rounded-xl z-0" />

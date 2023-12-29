@@ -93,40 +93,38 @@ function TaskCalendar() {
   };
 
   return (
-    <div className="z-[1]">
-      <ThemeProvider theme={darkTheme}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateCalendar
-            defaultValue={initialValue}
-            loading={isLoading}
-            onMonthChange={handleMonthChange}
-            renderLoading={() => <DayCalendarSkeleton />}
-            showDaysOutsideCurrentMonth
-            fixedWeekNumber={6}
-            value={highlightedDay}
-            onChange={(selectedDay: Dayjs | null) => {
-              if (dobleClickTimer) {
-                openTaskModal(selectedDay?.toDate() as Date);
-              } else {
-                handleChangeHighlightDay(dayjs(selectedDay));
-                setDobleClickTimer(true);
-                setTimeout(() => {
-                  setDobleClickTimer(false);
-                }, 400);
-              }
-            }}
-            slots={{
-              day: ServerDay,
-            }}
-            slotProps={{
-              day: {
-                highlightedDays,
-              } as any,
-            }}
-          />
-        </LocalizationProvider>
-      </ThemeProvider>{" "}
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DateCalendar
+          defaultValue={initialValue}
+          loading={isLoading}
+          onMonthChange={handleMonthChange}
+          renderLoading={() => <DayCalendarSkeleton />}
+          showDaysOutsideCurrentMonth
+          fixedWeekNumber={6}
+          value={highlightedDay}
+          onChange={(selectedDay: Dayjs | null) => {
+            if (dobleClickTimer) {
+              openTaskModal(selectedDay?.toDate() as Date);
+            } else {
+              handleChangeHighlightDay(dayjs(selectedDay));
+              setDobleClickTimer(true);
+              setTimeout(() => {
+                setDobleClickTimer(false);
+              }, 400);
+            }
+          }}
+          slots={{
+            day: ServerDay,
+          }}
+          slotProps={{
+            day: {
+              highlightedDays,
+            } as any,
+          }}
+        />
+      </LocalizationProvider>
+    </ThemeProvider>
   );
 }
 

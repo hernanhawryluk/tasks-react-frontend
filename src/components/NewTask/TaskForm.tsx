@@ -68,7 +68,7 @@ function TaskForm() {
 
   return (
     <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-      <div className="bg-zinc-800 w-[400px] h-[520px] p-[0.6px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-700 to-pink-500">
+      <div className="bg-zinc-800 w-[280px] xs:w-[330px] sm:w-[400px] h-[520px] p-[0.6px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-700 to-pink-500">
         <div className="bg-zinc-800 w-full h-full p-6 font-semibold rounded-xl border-[1.5px] border-neutral-600">
           <div className="flex justify-between">
             <Heading title="Create a Task" />
