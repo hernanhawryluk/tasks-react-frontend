@@ -18,7 +18,7 @@
 
 This is the front-end of a full-stack project developed with React and Node.js. This platform features a stunning presentation and responsive design, robust user authentication, comprehensive task management, and a dynamic calendar. Seamlessly communicating with its counterpart, you can explore the backend project right here:
 
-- Link to Backend project.
+- https://github.com/hernanhawryluk/tasks-nodejs-backend
 
 ## Features
 
@@ -43,7 +43,7 @@ This is the front-end of a full-stack project developed with React and Node.js. 
 
 ## Where is the backend?
 
--
+- https://github.com/hernanhawryluk/tasks-nodejs-backend
 
 ## Where to find me?
 

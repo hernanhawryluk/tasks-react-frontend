@@ -18,7 +18,7 @@
 
 Este proyecto es la interfaz de usuario de un proyecto full-stack desarrollado con React y Node.js. Esta plataforma cuenta con una presentación impresionante y un diseño adaptable, sólida autenticación de usuario, gestión integral de tareas y un calendario dinámico. Puedes explorar el proyecto del servidor (back-end) justo aquí:
 
--
+- https://github.com/hernanhawryluk/tasks-nodejs-backend
 
 ## Características
 
@@ -43,7 +43,7 @@ Este proyecto es la interfaz de usuario de un proyecto full-stack desarrollado c
 
 ## ¿Donde encuentro el back-end?
 
--
+- https://github.com/hernanhawryluk/tasks-nodejs-backend
 
 ## ¿Donde encontrarme?
 
