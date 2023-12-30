@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Heading from "../components/Heading";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { CircularProgress } from "@mui/material";
 
 type FormValues = {
   email: string;
@@ -18,7 +19,7 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
-  const { signin, isAuthenticated } = useAuth();
+  const { signin, isAuthenticated, loading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -96,9 +97,15 @@ function Login() {
               </p>
             )}
 
-            <button type="submit" className="button mt-6">
-              Login
-            </button>
+            {loading ? (
+              <div className="button mt-6 flex items-center justify-center h-[43px]">
+                <CircularProgress size={20} />
+              </div>
+            ) : (
+              <button type="submit" className="button mt-6 h-[43px]">
+                Login
+              </button>
+            )}
           </form>
           <p className="text-center mt-6 font-light">
             Don't have an account?{" "}

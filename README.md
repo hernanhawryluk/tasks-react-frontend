@@ -8,10 +8,10 @@
 <div>
   <h3>Technologies used</h3>
   <a href="#"><img alt="React" src="https://img.shields.io/badge/React-18.2.0-blue?logo=react"></a>
-  <a href="#"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.2.2-blue?logo=typescript"></a>
-  <a href="#"><img alt="Tailwind" src="https://img.shields.io/badge/Tailwind--CSS-3.3.5-blue?logo=tailwindcss"></a>
+  <a href="#"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.0.2-blue?logo=typescript"></a>
+  <a href="#"><img alt="Tailwind" src="https://img.shields.io/badge/Tailwind--CSS-3.4.0-blue?logo=tailwindcss"></a>
   <a href="#"><img alt="MongoDb" src="https://img.shields.io/badge/MongoDb-7.0-blue?logo=mongodb"></a>
-  <a href="#"><img alt="MaterialUI" src="https://img.shields.io/badge/Material%20UI-14.5.0-blue?logo=mui"></a>
+  <a href="#"><img alt="MaterialUI" src="https://img.shields.io/badge/Material%20UI-5.15.1-blue?logo=mui"></a>
 </div>
 
 ## Description
@@ -41,7 +41,7 @@ This is the front-end of a full-stack project developed with React and Node.js. 
 
 - https://tasks-react-frontend.vercel.app/
 
-## Where is the backend?
+## Where is the backend Repository?
 
 - https://github.com/hernanhawryluk/tasks-nodejs-backend
 

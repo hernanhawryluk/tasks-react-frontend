@@ -88,6 +88,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   const signup = async (user: UserSignup) => {
+    setLoading(true);
     try {
       const res = await registerRequest(user);
       setUser(res.data);
@@ -97,9 +98,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       console.log(error);
       setErrors(error.response.data.message);
     }
+    setLoading(false);
   };
 
   const signin = async (user: UserSignin) => {
+    setLoading(true);
     try {
       const res = await loginRequest(user);
       setUser(res.data);
@@ -112,6 +115,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }
       setErrors([error.response.data.message]);
     }
+    setLoading(false);
   };
 
   const logout = async () => {

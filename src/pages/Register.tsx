@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Heading from "../components/Heading";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { CircularProgress } from "@mui/material";
 
 type FormValues = {
   username: string;
@@ -19,7 +20,12 @@ function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
-  const { signup, isAuthenticated, errors: registerErrors } = useAuth();
+  const {
+    signup,
+    isAuthenticated,
+    loading,
+    errors: registerErrors,
+  } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -125,9 +131,15 @@ function Register() {
                   : "Password must be between 6 and 20 characters"}
               </p>
             )}
-            <button type="submit" className="button mt-8">
-              Register
-            </button>
+            {loading ? (
+              <div className="button mt-6 flex items-center justify-center h-[43px]">
+                <CircularProgress size={20} />
+              </div>
+            ) : (
+              <button type="submit" className="button mt-6 h-[43px]">
+                Register
+              </button>
+            )}
           </form>
           <p className="text-center mt-6 font-light">
             Already have an account?{" "}
