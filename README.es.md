@@ -1,4 +1,4 @@
-# ecommerce-nextjs-app
+# tasks-react-frontend
 
 <div>
 <h4>Opciones de lenguaje:</h4>
