@@ -13,6 +13,7 @@ import Background from "./components/Background";
 import Container from "./components/Container";
 import { CalendarProvider } from "./context/CalendarContext";
 import { NotesProvider } from "./context/NotesContext";
+import { Helmet } from "react-helmet";
 
 function App() {
   return (
@@ -21,6 +22,12 @@ function App() {
         <TaskProvider>
           <NotesProvider>
             <BrowserRouter>
+              <Helmet>
+                <meta
+                  name="description"
+                  content="A full-stack project developed with React and Node.js. This platform features a stunning presentation and responsive design, robust user authentication, comprehensive task management, and a dynamic calendar. This is part of my portfolio."
+                />
+              </Helmet>
               <main className="flex flex-col w-full min-h-[100vh] gap-[50px] sm:gap-10 bg-neutral-950 relative overflow-x-hidden">
                 <Toaster
                   position="bottom-right"
