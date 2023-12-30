@@ -100,9 +100,9 @@ function Login() {
               Login
             </button>
           </form>
-          <p className="text-center mt-6">
+          <p className="text-center mt-6 font-light">
             Don't have an account?{" "}
-            <Link to="/register" className="text-sky-400">
+            <Link to="/register" className="text-sky-500 font-semibold">
               Sign up
             </Link>
           </p>
