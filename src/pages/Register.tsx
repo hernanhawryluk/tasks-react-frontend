@@ -131,7 +131,7 @@ function Register() {
           </form>
           <p className="text-center mt-6">
             Already have an account?{" "}
-            <Link to="/login" className="text-sky-500">
+            <Link to="/login" className="text-sky-400">
               Login
             </Link>
           </p>

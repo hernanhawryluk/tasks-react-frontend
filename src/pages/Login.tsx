@@ -102,7 +102,7 @@ function Login() {
           </form>
           <p className="text-center mt-6">
             Don't have an account?{" "}
-            <Link to="/register" className="text-sky-500">
+            <Link to="/register" className="text-sky-400">
               Sign up
             </Link>
           </p>
