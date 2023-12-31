@@ -74,9 +74,9 @@ function TaskCard({ task }: { task: Task }) {
               : task.title?.slice(0, 36) + "..."}
           </h1>
           <p className="text-sm text-neutral-300">
-            {task.description && task.description.length < 90
+            {task.description && task.description.length < 100
               ? task.description
-              : task.description?.slice(0, 90) + "..."}
+              : task.description?.slice(0, 100) + "..."}
           </p>
         </header>
         <div className="flex justify-between items-center">
