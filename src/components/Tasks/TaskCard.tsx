@@ -68,11 +68,7 @@ function TaskCard({ task }: { task: Task }) {
     <div className="bg-zinc-800 w-[100%] sm:w-[48%] lg:w-[48%] xl:w-[31.8%] 2xl:w-[23.8%] h-[200px] p-[0.5px] rounded-xl bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700 z-[1]">
       <div className="flex flex-col justify-between bg-gradient-to-r from-zinc-800 to-zinc-900 border-[1.5px] border-neutral-600 w-full h-full p-4 rounded-xl">
         <header>
-          <h1 className="text-lg font-bold mb-2">
-            {task.title && task.title.length < 20
-              ? task.title
-              : task.title?.slice(0, 20) + "..."}
-          </h1>
+          <h1 className="text-lg font-bold mb-2 single-line">{task.title}</h1>
           <p className="text-sm text-neutral-300">
             {task.description && task.description.length < 180
               ? task.description
