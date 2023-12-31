@@ -32,3 +32,10 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.multi-line {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 4;
+}

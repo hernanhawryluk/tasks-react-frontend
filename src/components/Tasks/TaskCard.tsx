@@ -69,10 +69,8 @@ function TaskCard({ task }: { task: Task }) {
       <div className="flex flex-col justify-between bg-gradient-to-r from-zinc-800 to-zinc-900 border-[1.5px] border-neutral-600 w-full h-full p-4 rounded-xl">
         <header>
           <h1 className="text-lg font-bold mb-2 single-line">{task.title}</h1>
-          <p className="text-sm text-neutral-300">
-            {task.description && task.description.length < 180
-              ? task.description
-              : task.description?.slice(0, 180) + "..."}
+          <p className="text-sm text-neutral-300 multi-line">
+            {task.description}
           </p>
         </header>
         <div className="flex justify-between items-center">
