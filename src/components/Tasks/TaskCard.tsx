@@ -69,14 +69,14 @@ function TaskCard({ task }: { task: Task }) {
       <div className="flex flex-col justify-between bg-gradient-to-r from-zinc-800 to-zinc-900 border-[1.5px] border-neutral-600 w-full h-full p-4 rounded-xl">
         <header>
           <h1 className="text-lg font-bold mb-2">
-            {task.title && task.title.length < 28
+            {task.title && task.title.length < 36
               ? task.title
-              : task.title?.slice(0, 28) + "..."}
+              : task.title?.slice(0, 36) + "..."}
           </h1>
           <p className="text-sm text-neutral-300">
-            {task.description && task.description.length < 80
+            {task.description && task.description.length < 90
               ? task.description
-              : task.description?.slice(0, 80) + "..."}
+              : task.description?.slice(0, 90) + "..."}
           </p>
         </header>
         <div className="flex justify-between items-center">
