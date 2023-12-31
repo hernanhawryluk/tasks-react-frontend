@@ -26,3 +26,9 @@ body {
 .highlight {
   @apply hover:scale-110 hover:text-neutral-100 active:scale-95 transition;
 }
+
+.single-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
