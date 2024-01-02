@@ -2,8 +2,8 @@
   "rewrites": [
     { "source": "/(.*)", "destination": "/" },
     {
-      "source": "/api/(.*)",
-      "destination": "https://tasks-nodejs-backend.vercel.app/api/"
+      "source": "/api/:path*",
+      "destination": "https://tasks-nodejs-backend.vercel.app/api/:path*"
     }
   ]
 }
