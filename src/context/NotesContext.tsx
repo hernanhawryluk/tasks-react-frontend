@@ -31,7 +31,7 @@ export function NotesProvider({ children }: NotesProviderProps) {
   const getNotes = async () => {
     try {
       const res = await getNotesRequest();
-      if (res.data.notes) setNotes(res.data.notes);
+      if (res.data?.notes) setNotes(res.data.notes);
       else setNotes("");
     } catch (error) {
       console.log(error);
