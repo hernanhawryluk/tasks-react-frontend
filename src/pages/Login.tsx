@@ -44,6 +44,7 @@ function Login() {
               Email
             </label>
             <input
+              id="email"
               type="email"
               {...register("email", {
                 required: true,
@@ -85,6 +86,7 @@ function Login() {
                 minLength: 6,
                 maxLength: 20,
               })}
+              id="password"
               placeholder="Password"
               className={`inputbox 
           ${errors.password && "border-2 border-red-500"}`}

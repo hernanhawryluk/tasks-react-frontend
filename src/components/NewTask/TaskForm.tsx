@@ -83,16 +83,18 @@ function TaskForm() {
               Title
             </label>
             <input
+              id="title"
               type="text"
               placeholder="Title"
               {...register("title", { required: true })}
               className="inputbox"
             />
 
-            <label htmlFor="title" className="label mt-4">
+            <label htmlFor="description" className="label mt-4">
               Description
             </label>
             <textarea
+              id="description"
               rows={3}
               placeholder="Description"
               {...register("description", { required: true })}
@@ -102,6 +104,7 @@ function TaskForm() {
               Date
             </label>
             <input
+              id="date"
               type="date"
               {...register("date", { required: true })}
               className="inputbox"

@@ -50,6 +50,7 @@ function Register() {
               Username
             </label>
             <input
+              id="username"
               type="text"
               {...register("username", {
                 required: true,
@@ -72,6 +73,7 @@ function Register() {
               Email
             </label>
             <input
+              id="email"
               type="email"
               {...register("email", {
                 required: true,
@@ -121,6 +123,7 @@ function Register() {
                 maxLength: 20,
               })}
               placeholder="Password"
+              id="password"
               className={`inputbox 
           ${errors.password && "border-2 border-red-500"}`}
             />
